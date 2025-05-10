@@ -45,9 +45,9 @@ repomix --no-security-check
 ──────────────────
 2 suspicious file(s) detected and excluded:
 1. config/credentials.json
-   - Found AWS access key
+  - Found AWS access key
 2. .env.local
-   - Found database password
+  - Found database password
 ```
 
 ## 最佳实践

@@ -99,10 +99,11 @@ dist/**
 
 ### Git 통합
 
-`output.git` 설정을 통해 Git 히스토리를 기반으로 파일을 정렬하는 방법을 제어할 수 있습니다:
+`output.git` 설정을 통해 Git 히스토리를 기반으로 파일을 정렬하는 방법과 Git 차이점을 포함하는 방법을 제어할 수 있습니다:
 
 - `sortByChanges`: `true`로 설정하면, 파일은 Git 변경 횟수(해당 파일을 수정한 커밋 수)에 따라 정렬됩니다. 더 많은 변경이 있는 파일이 출력의 하단에 표시됩니다. 이는 더 활발하게 개발되는 파일을 우선순위화하는 데 도움이 됩니다. 기본값: `true`
 - `sortByChangesMaxCommits`: 파일 변경 횟수를 계산할 때 분석할 최대 커밋 수입니다. 기본값: `100`
+- `includeDiffs`: `true`로 설정하면, Git 차이점을 출력에 포함합니다(작업 트리와 스테이지된 변경사항을 별도로 포함). 이를 통해 저장소의 대기 중인 변경 사항을 확인할 수 있습니다. 기본값: `false`
 
 설정 예시:
 ```json
@@ -110,7 +111,8 @@ dist/**
   "output": {
     "git": {
       "sortByChanges": true,
-      "sortByChangesMaxCommits": 100
+      "sortByChangesMaxCommits": 100,
+      "includeDiffs": true
     }
   }
 }

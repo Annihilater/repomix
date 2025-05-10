@@ -25,19 +25,19 @@ Você pode instalar o servidor MCP do Repomix no VS Code usando um destes métod
 
 1. **Usando o distintivo de instalação:**
 
-   [![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Server&color=0098FF)](vscode:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)<br>
-   [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-VS_Code_Insiders?style=flat-square&label=Install%20Server&color=24bfa5)](vscode-insiders:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)
+  [![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Server&color=0098FF)](vscode:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)<br>
+  [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-VS_Code_Insiders?style=flat-square&label=Install%20Server&color=24bfa5)](vscode-insiders:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)
 
 2. **Usando a linha de comando:**
 
-   ```bash
-   code --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
-   ```
+  ```bash
+  code --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
+  ```
 
-   Para VS Code Insiders:
-   ```bash
-   code-insiders --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
-   ```
+  Para VS Code Insiders:
+  ```bash
+  code-insiders --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
+  ```
 
 ### Para o Cline (extensão do VS Code)
 
@@ -134,16 +134,16 @@ Esta ferramenta lê o conteúdo de um arquivo de saída do Repomix em ambientes 
 O servidor MCP do Repomix fornece duas ferramentas de sistema de arquivos que permitem que os assistentes de IA interajam com segurança com o sistema de arquivos local:
 
 1. `file_system_read_file`
-   - Lê conteúdo de arquivos usando caminhos absolutos
-   - Implementa validação de segurança usando [Secretlint](https://github.com/secretlint/secretlint)
-   - Previne acesso a arquivos contendo informações sensíveis
-   - Retorna mensagens de erro claras para caminhos inválidos e problemas de segurança
+  - Lê conteúdo de arquivos usando caminhos absolutos
+  - Implementa validação de segurança usando [Secretlint](https://github.com/secretlint/secretlint)
+  - Previne acesso a arquivos contendo informações sensíveis
+  - Retorna mensagens de erro claras para caminhos inválidos e problemas de segurança
 
 2. `file_system_read_directory`
-   - Lista conteúdos de diretórios usando caminhos absolutos
-   - Mostra arquivos e diretórios com indicadores claros (`[FILE]` ou `[DIR]`)
-   - Fornece navegação segura de diretórios com tratamento apropriado de erros
-   - Valida caminhos e garante que sejam absolutos
+  - Lista conteúdos de diretórios usando caminhos absolutos
+  - Mostra arquivos e diretórios com indicadores claros (`[FILE]` ou `[DIR]`)
+  - Fornece navegação segura de diretórios com tratamento apropriado de erros
+  - Valida caminhos e garante que sejam absolutos
 
 Ambas as ferramentas incorporam medidas de segurança robustas:
 - Validação de caminhos absolutos para prevenir ataques de travessia de diretórios

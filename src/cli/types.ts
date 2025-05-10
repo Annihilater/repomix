@@ -7,6 +7,7 @@ export interface CliOptions extends OptionValues {
 
   // Output Options
   output?: string;
+  stdout?: boolean;
   style?: RepomixOutputStyle;
   parsableStyle?: boolean;
   compress?: boolean;
@@ -21,6 +22,7 @@ export interface CliOptions extends OptionValues {
   instructionFilePath?: string;
   includeEmptyDirectories?: boolean;
   gitSortByChanges?: boolean;
+  includeDiffs?: boolean;
 
   // Filter Options
   include?: string;

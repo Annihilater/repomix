@@ -13,7 +13,7 @@ export class Spinner {
   constructor(message: string, cliOptions: CliOptions) {
     this.message = message;
     // If the user has specified the verbose flag, don't show the spinner
-    this.isQuiet = cliOptions.quiet || cliOptions.verbose || false;
+    this.isQuiet = cliOptions.quiet || cliOptions.verbose || cliOptions.stdout || false;
   }
 
   start(): void {

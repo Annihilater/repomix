@@ -26,6 +26,7 @@ export const configZhCn = defineConfig({
             { text: '代码压缩', link: '/zh-cn/guide/code-compress' },
             { text: '安全性', link: '/zh-cn/guide/security' },
             { text: 'MCP 服务器', link: '/zh-cn/guide/mcp-server' },
+            { text: 'GitHub Actions', link: '/zh-cn/guide/github-actions' },
             {
               text: '技巧与窍门',
               items: [{ text: '最佳实践', link: '/zh-cn/guide/tips/best-practices' }],

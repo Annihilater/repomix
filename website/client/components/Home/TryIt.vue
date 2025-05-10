@@ -44,6 +44,7 @@
             v-model:url="inputUrl"
             :loading="loading"
             @keydown="handleKeydown"
+            @submit="handleSubmit"
             :show-button="false"
           />
         </div>

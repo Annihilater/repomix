@@ -166,5 +166,10 @@ export const generateSummaryNotes = (config: RepomixConfigMerged): string => {
     notes.push('- Files are sorted by Git change count (files with more changes are at the bottom)');
   }
 
+  // Git diffs notes
+  if (config.output.git?.includeDiffs) {
+    notes.push('- Git diffs from the worktree and staged changes are included');
+  }
+
   return notes.join('\n');
 };

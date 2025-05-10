@@ -26,6 +26,7 @@ export const configDe = defineConfig({
             { text: 'Code-Komprimierung', link: '/de/guide/code-compress' },
             { text: 'Sicherheit', link: '/de/guide/security' },
             { text: 'MCP-Server', link: '/de/guide/mcp-server' },
+            { text: 'GitHub Actions', link: '/de/guide/github-actions' },
             {
               text: 'Tipps & Tricks',
               items: [{ text: 'Best Practices', link: '/de/guide/tips/best-practices' }],

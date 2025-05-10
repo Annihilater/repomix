@@ -75,6 +75,10 @@ describe('processConcurrency', () => {
         minThreads: 1,
         maxThreads: 4,
         idleTimeout: 5000,
+        env: expect.objectContaining({
+          ...process.env,
+          REPOMIX_LOGLEVEL: '2',
+        }),
       });
       expect(piscina).toBeDefined();
     });

@@ -7,9 +7,13 @@ describe('Solidity File Parsing', () => {
   let parser: LanguageParser;
   const defaultConfig: RepomixConfigMerged = {
     cwd: process.cwd(),
+    input: {
+      maxFileSize: 50 * 1024 * 1024,
+    },
     output: {
       filePath: 'output.txt',
       style: 'xml',
+      stdout: false,
       parsableStyle: false,
       fileSummary: true,
       directoryStructure: true,
@@ -23,6 +27,7 @@ describe('Solidity File Parsing', () => {
       git: {
         sortByChanges: true,
         sortByChangesMaxCommits: 100,
+        includeDiffs: false,
       },
     },
     include: [],

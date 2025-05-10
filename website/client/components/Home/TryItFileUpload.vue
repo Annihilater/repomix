@@ -55,12 +55,13 @@ function triggerFileInput() {
 
 <template>
   <div class="upload-wrapper">
-    <div class="upload-container"
-         :class="{ 'drag-active': dragActive, 'has-error': errorMessage }"
-         @dragover.prevent="dragActive = true"
-         @dragleave="dragActive = false"
-         @drop.prevent="handleFileSelect($event.dataTransfer?.files || null)"
-         @click="triggerFileInput"
+    <div
+      class="upload-container"
+      :class="{ 'drag-active': dragActive, 'has-error': errorMessage }"
+      @dragover.prevent="dragActive = true"
+      @dragleave="dragActive = false"
+      @drop.prevent="handleFileSelect($event.dataTransfer?.files || null)"
+      @click="triggerFileInput"
     >
       <input
         ref="fileInput"

@@ -31,9 +31,7 @@ const mockInitTaskRunner = () => {
 
 describe('runSecurityCheck', () => {
   it('should identify files with security issues', async () => {
-    const result = await runSecurityCheck(mockFiles, () => {}, {
-      initTaskRunner: mockInitTaskRunner,
-    });
+    const result = await runSecurityCheck(mockFiles, () => {}, undefined, { initTaskRunner: mockInitTaskRunner });
 
     expect(result).toHaveLength(1);
     expect(result[0].filePath).toBe('test1.js');
@@ -43,7 +41,7 @@ describe('runSecurityCheck', () => {
   it('should call progress callback with correct messages', async () => {
     const progressCallback = vi.fn();
 
-    await runSecurityCheck(mockFiles, progressCallback, {
+    await runSecurityCheck(mockFiles, progressCallback, undefined, {
       initTaskRunner: mockInitTaskRunner,
     });
 
@@ -64,7 +62,7 @@ describe('runSecurityCheck', () => {
     };
 
     await expect(
-      runSecurityCheck(mockFiles, () => {}, {
+      runSecurityCheck(mockFiles, () => {}, undefined, {
         initTaskRunner: mockErrorTaskRunner,
       }),
     ).rejects.toThrow('Worker error');
@@ -73,7 +71,7 @@ describe('runSecurityCheck', () => {
   });
 
   it('should handle empty file list', async () => {
-    const result = await runSecurityCheck([], () => {}, {
+    const result = await runSecurityCheck([], () => {}, undefined, {
       initTaskRunner: mockInitTaskRunner,
     });
 
@@ -81,7 +79,7 @@ describe('runSecurityCheck', () => {
   });
 
   it('should log performance metrics in trace mode', async () => {
-    await runSecurityCheck(mockFiles, () => {}, {
+    await runSecurityCheck(mockFiles, () => {}, undefined, {
       initTaskRunner: mockInitTaskRunner,
     });
 
@@ -92,7 +90,7 @@ describe('runSecurityCheck', () => {
   it('should process files in parallel', async () => {
     const startTime = Date.now();
 
-    await runSecurityCheck(mockFiles, () => {}, {
+    await runSecurityCheck(mockFiles, () => {}, undefined, {
       initTaskRunner: mockInitTaskRunner,
     });
 
@@ -106,7 +104,7 @@ describe('runSecurityCheck', () => {
   it('should not modify original files', async () => {
     const originalFiles = JSON.parse(JSON.stringify(mockFiles));
 
-    await runSecurityCheck(mockFiles, () => {}, {
+    await runSecurityCheck(mockFiles, () => {}, undefined, {
       initTaskRunner: mockInitTaskRunner,
     });
 

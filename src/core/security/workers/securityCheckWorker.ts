@@ -1,24 +1,32 @@
 import { lintSource } from '@secretlint/core';
 import { creator } from '@secretlint/secretlint-rule-preset-recommend';
 import type { SecretLintCoreConfig } from '@secretlint/types';
-import { logger } from '../../../shared/logger.js';
+import { logger, setLogLevelByEnv } from '../../../shared/logger.js';
+
+// Security check type to distinguish between regular files and git diffs
+export type SecurityCheckType = 'file' | 'gitDiff';
 
 export interface SecurityCheckTask {
   filePath: string;
   content: string;
+  type: SecurityCheckType;
 }
 
 export interface SuspiciousFileResult {
   filePath: string;
   messages: string[];
+  type: SecurityCheckType;
 }
 
-export default async ({ filePath, content }: SecurityCheckTask) => {
+// Set logger log level from environment variable if provided
+setLogLevelByEnv();
+
+export default async ({ filePath, content, type }: SecurityCheckTask) => {
   const config = createSecretLintConfig();
 
   try {
     const processStartAt = process.hrtime.bigint();
-    const secretLintResult = await runSecretLint(filePath, content, config);
+    const secretLintResult = await runSecretLint(filePath, content, type, config);
     const processEndAt = process.hrtime.bigint();
 
     logger.trace(
@@ -35,6 +43,7 @@ export default async ({ filePath, content }: SecurityCheckTask) => {
 export const runSecretLint = async (
   filePath: string,
   content: string,
+  type: SecurityCheckType,
   config: SecretLintCoreConfig,
 ): Promise<SuspiciousFileResult | null> => {
   const result = await lintSource({
@@ -56,6 +65,7 @@ export const runSecretLint = async (
     return {
       filePath,
       messages: result.messages.map((message) => message.message),
+      type,
     };
   }
 

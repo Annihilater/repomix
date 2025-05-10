@@ -39,7 +39,7 @@ const copyCommand = async (event: Event) => {
           </button>
         </div>
         <p class="guide-link">
-          See <a href="#power-user-guide">Power User Guide</a> for more details.
+          See <a href="#using-the-cli-tool">Using the CLI Tool</a> for more details.
         </p>
       </div>
     </div>

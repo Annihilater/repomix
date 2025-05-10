@@ -44,7 +44,7 @@ H4PSJT5bvaEhxRj7QCwonoX4ZpV0beTnzloS55Z65g==
     `;
     // secretlint-enable
 
-    const secretLintResult = await runSecretLint('test.md', sensitiveContent, config);
+    const secretLintResult = await runSecretLint('test.md', sensitiveContent, 'file', config);
     expect(secretLintResult).not.toBeNull();
   });
 
@@ -71,7 +71,7 @@ And here's a list:
 That's all!
     `;
 
-    const secretLintResult = await runSecretLint('normal.md', normalContent, config);
+    const secretLintResult = await runSecretLint('normal.md', normalContent, 'file', config);
     expect(secretLintResult).toBeNull();
   });
 });

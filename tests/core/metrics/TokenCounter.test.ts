@@ -1,6 +1,6 @@
 import { type Tiktoken, get_encoding } from 'tiktoken';
 import { type Mock, afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-import { TokenCounter } from '../../../src/core/tokenCount/tokenCount.js';
+import { TokenCounter } from '../../../src/core/metrics/TokenCounter.js';
 import { logger } from '../../../src/shared/logger.js';
 
 vi.mock('tiktoken', () => ({
@@ -113,7 +113,7 @@ describe('TokenCounter', () => {
       ## Subheading
       * List item 1
       * List item 2
-      
+
       **Bold text** and _italic text_
     `;
     const mockTokens = Array(15).fill(1); // 15 tokens

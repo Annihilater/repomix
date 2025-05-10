@@ -25,19 +25,19 @@ VS CodeにRepomix MCPサーバーをインストールするには、以下の�
 
 1. **インストールバッジを使用：**
 
-   [![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Server&color=0098FF)](vscode:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)<br>
-   [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-VS_Code_Insiders?style=flat-square&label=Install%20Server&color=24bfa5)](vscode-insiders:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)
+  [![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Server&color=0098FF)](vscode:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)<br>
+  [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-VS_Code_Insiders?style=flat-square&label=Install%20Server&color=24bfa5)](vscode-insiders:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)
 
 2. **コマンドラインを使用：**
 
-   ```bash
-   code --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
-   ```
+  ```bash
+  code --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
+  ```
 
-   VS Code Insiders の場合：
-   ```bash
-   code-insiders --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
-   ```
+  VS Code Insiders の場合：
+  ```bash
+  code-insiders --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
+  ```
 
 ### Cline（VS Code拡張機能）の場合
 
@@ -134,16 +134,16 @@ MCPサーバーとして実行すると、Repomixは以下のツールを提供�
 RepomixのMCPサーバーは、AIアシスタントがローカルファイルシステムと安全にやり取りするための2つのファイルシステムツールを提供しています：
 
 1. `file_system_read_file`
-   - 絶対パスを使用してファイルの内容を読み取り
-   - [Secretlint](https://github.com/secretlint/secretlint)を使用したセキュリティ検証を実装
-   - 機密情報を含むファイルへのアクセスを防止
-   - 無効なパスやセキュリティの問題に対する明確なエラーメッセージを返す
+  - 絶対パスを使用してファイルの内容を読み取り
+  - [Secretlint](https://github.com/secretlint/secretlint)を使用したセキュリティ検証を実装
+  - 機密情報を含むファイルへのアクセスを防止
+  - 無効なパスやセキュリティの問題に対する明確なエラーメッセージを返す
 
 2. `file_system_read_directory`
-   - 絶対パスを使用してディレクトリの内容を一覧表示
-   - ファイルとディレクトリを明確な指標（`[FILE]`または`[DIR]`）で表示
-   - 適切なエラー処理による安全なディレクトリ走査を提供
-   - パスの検証と絶対パスの確認を実施
+  - 絶対パスを使用してディレクトリの内容を一覧表示
+  - ファイルとディレクトリを明確な指標（`[FILE]`または`[DIR]`）で表示
+  - 適切なエラー処理による安全なディレクトリ走査を提供
+  - パスの検証と絶対パスの確認を実施
 
 両ツールは堅牢なセキュリティ対策を組み込んでいます：
 - ディレクトリトラバーサル攻撃を防ぐための絶対パス検証

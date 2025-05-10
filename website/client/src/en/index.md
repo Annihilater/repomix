@@ -29,7 +29,7 @@ features:
 
 ## Quick Start
 
-Once you've generated a packed file (`repomix-output.txt`) using Repomix, you can send it to an AI assistant with a prompt like:
+Once you've generated a packed file (`repomix-output.xml`) using Repomix, you can send it to an AI assistant (like ChatGPT, Claude) with a prompt like:
 
 ```
 This file contains all the files in the repository combined into one.
@@ -47,10 +47,9 @@ When discussing specific changes, the AI can help generate code. With features l
 Happy coding! 🚀
 
 
+## Using the CLI Tool {#using-the-cli-tool}
 
-## Power User Guide
-
-For advanced users who need more control, Repomix offers extensive customization options through its CLI interface.
+Repomix can be used as a command-line tool, offering powerful features and customization options.
 
 ### Quick Start
 
@@ -76,7 +75,7 @@ brew install repomix
 repomix
 ```
 
-That's it! Repomix will generate a `repomix-output.txt` file in your current directory, containing your entire repository in an AI-friendly format.
+That's it! Repomix will generate a `repomix-output.xml` file in your current directory, containing your entire repository in an AI-friendly format.
 
 
 
@@ -184,8 +183,8 @@ Create a `repomix.config.json` for persistent settings:
 ```
 
 ### More Examples
-::: tip
-💡 Check out our [GitHub repository](https://github.com/yamadashy/repomix) for complete documentation and more examples!
+::: tip Need more help? 💡
+Check out our comprehensive documentation in the [Guide](/guide/) or explore the [GitHub Repository](https://github.com/yamadashy/repomix) for more examples and source code.
 :::
 
 </div>

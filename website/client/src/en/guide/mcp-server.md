@@ -25,19 +25,19 @@ You can install the Repomix MCP server in VS Code using one of these methods:
 
 1. **Using the Install Badge:**
 
-   [![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Server&color=0098FF)](vscode:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)<br>
-   [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-VS_Code_Insiders?style=flat-square&label=Install%20Server&color=24bfa5)](vscode-insiders:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)
+  [![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Server&color=0098FF)](vscode:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)<br>
+  [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-VS_Code_Insiders?style=flat-square&label=Install%20Server&color=24bfa5)](vscode-insiders:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)
 
 2. **Using the Command Line:**
 
-   ```bash
-   code --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
-   ```
+  ```bash
+  code --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
+  ```
 
-   For VS Code Insiders:
-   ```bash
-   code-insiders --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
-   ```
+  For VS Code Insiders:
+  ```bash
+  code-insiders --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
+  ```
 
 ### For Cline (VS Code extension)
 
@@ -134,16 +134,16 @@ This tool reads the contents of a Repomix output file in environments where dire
 Repomix's MCP server provides two file system tools that allow AI assistants to safely interact with the local file system:
 
 1. `file_system_read_file`
-   - Reads file contents using absolute paths
-   - Implements security validation using [Secretlint](https://github.com/secretlint/secretlint)
-   - Prevents access to files containing sensitive information
-   - Returns formatted content with clear error messages for invalid paths or security issues
+  - Reads file contents using absolute paths
+  - Implements security validation using [Secretlint](https://github.com/secretlint/secretlint)
+  - Prevents access to files containing sensitive information
+  - Returns formatted content with clear error messages for invalid paths or security issues
 
 2. `file_system_read_directory`
-   - Lists directory contents using absolute paths
-   - Shows both files and directories with clear indicators (`[FILE]` or `[DIR]`)
-   - Provides safe directory traversal with proper error handling
-   - Validates paths and ensures they are absolute
+  - Lists directory contents using absolute paths
+  - Shows both files and directories with clear indicators (`[FILE]` or `[DIR]`)
+  - Provides safe directory traversal with proper error handling
+  - Validates paths and ensures they are absolute
 
 Both tools incorporate robust security measures:
 - Absolute path validation to prevent directory traversal attacks

@@ -10,7 +10,7 @@ Führen Sie diesen Befehl in Ihrem Projektverzeichnis aus:
 npx repomix
 ```
 
-Das war's! Sie finden eine `repomix-output.txt` Datei, die Ihr gesamtes Repository in einem KI-freundlichen Format enthält.
+Das war's! Sie finden eine `repomix-output.xml` Datei, die Ihr gesamtes Repository in einem KI-freundlichen Format enthält.
 
 Sie können diese Datei dann mit einem Prompt wie diesem an einen KI-Assistenten senden:
 

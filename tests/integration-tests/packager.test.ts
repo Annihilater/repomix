@@ -78,8 +78,8 @@ describe.runIf(!isWindows)('packager integration', () => {
       await pack([inputDir], mergedConfig, () => {}, {
         searchFiles,
         sortPaths: (filePaths) => filePaths,
-        collectFiles: (filePaths, rootDir, progressCallback) => {
-          return collectFiles(filePaths, rootDir, progressCallback, {
+        collectFiles: (filePaths, rootDir, config, progressCallback) => {
+          return collectFiles(filePaths, rootDir, config, progressCallback, {
             initTaskRunner: mockCollectFileInitTaskRunner,
           });
         },
@@ -92,18 +92,23 @@ describe.runIf(!isWindows)('packager integration', () => {
         },
         generateOutput,
         validateFileSafety: (rawFiles, progressCallback, config) => {
-          return validateFileSafety(rawFiles, progressCallback, config, {
+          const gitDiffMock = {
+            workTreeDiffContent: '',
+            stagedDiffContent: '',
+          };
+          return validateFileSafety(rawFiles, progressCallback, config, gitDiffMock, {
             runSecurityCheck: async () => [],
             filterOutUntrustedFiles,
           });
         },
-        writeOutputToDisk,
+        handleOutput: writeOutputToDisk,
         copyToClipboardIfEnabled,
-        calculateMetrics: async (processedFiles, output, progressCallback, config) => {
+        calculateMetrics: async (processedFiles, output, progressCallback, config, gitDiffResult) => {
           return {
             totalFiles: processedFiles.length,
             totalCharacters: processedFiles.reduce((acc, file) => acc + file.content.length, 0),
             totalTokens: processedFiles.reduce((acc, file) => acc + file.content.split(/\s+/).length, 0),
+            gitDiffTokenCount: 0,
             fileCharCounts: processedFiles.reduce(
               (acc, file) => {
                 acc[file.path] = file.content.length;
@@ -118,6 +123,8 @@ describe.runIf(!isWindows)('packager integration', () => {
               },
               {} as Record<string, number>,
             ),
+            suspiciousFilesResults: [],
+            suspiciousGitDiffResults: [],
           };
         },
       });

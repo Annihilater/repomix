@@ -99,10 +99,11 @@ dist/**
 
 ### Git統合
 
-`output.git`設定では、Gitの履歴に基づいてファイルをソートする方法を制御できます：
+`output.git`設定では、Gitの履歴に基づいてファイルをソートする方法や、Gitの差分を含める方法を制御できます：
 
 - `sortByChanges`: `true`に設定すると、ファイルはGitの変更回数（そのファイルを変更したコミット数）でソートされます。より多くの変更があるファイルが出力の下部に表示されます。これは、より活発に開発されているファイルを優先するのに役立ちます。デフォルト: `true`
 - `sortByChangesMaxCommits`: ファイルの変更回数を数える際に分析する最大コミット数。デフォルト: `100`
+- `includeDiffs`: `true`に設定すると、Git差分を出力に含めます（ワークツリーとステージング済みの変更を別々に含みます）。これにより、リポジトリの保留中の変更を確認できます。デフォルト: `false`
 
 設定例：
 ```json
@@ -110,7 +111,8 @@ dist/**
   "output": {
     "git": {
       "sortByChanges": true,
-      "sortByChangesMaxCommits": 100
+      "sortByChangesMaxCommits": 100,
+      "includeDiffs": true
     }
   }
 }

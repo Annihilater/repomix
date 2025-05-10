@@ -90,3 +90,20 @@ export const logger = new RepomixLogger();
 export const setLogLevel = (level: RepomixLogLevel) => {
   logger.setLogLevel(level);
 };
+
+/**
+ * Set logger log level from REPOMIX_LOGLEVEL environment variable if valid.
+ */
+export const setLogLevelByEnv = () => {
+  const logLevelStr = process.env.REPOMIX_LOGLEVEL;
+  const logLevelNum = Number(logLevelStr);
+  if (
+    logLevelNum === repomixLogLevels.SILENT ||
+    logLevelNum === repomixLogLevels.ERROR ||
+    logLevelNum === repomixLogLevels.WARN ||
+    logLevelNum === repomixLogLevels.INFO ||
+    logLevelNum === repomixLogLevels.DEBUG
+  ) {
+    setLogLevel(logLevelNum);
+  }
+};

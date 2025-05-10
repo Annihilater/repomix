@@ -60,6 +60,9 @@ describe('configSchema', () => {
   describe('repomixConfigDefaultSchema', () => {
     it('should accept valid default config', () => {
       const validConfig = {
+        input: {
+          maxFileSize: 50 * 1024 * 1024,
+        },
         output: {
           filePath: 'output.txt',
           style: 'plain',
@@ -76,6 +79,7 @@ describe('configSchema', () => {
           git: {
             sortByChanges: true,
             sortByChangesMaxCommits: 100,
+            includeDiffs: false,
           },
         },
         include: [],
@@ -150,6 +154,9 @@ describe('configSchema', () => {
     it('should accept valid merged config', () => {
       const validConfig = {
         cwd: '/path/to/project',
+        input: {
+          maxFileSize: 50 * 1024 * 1024,
+        },
         output: {
           filePath: 'merged-output.txt',
           style: 'plain',
@@ -166,6 +173,7 @@ describe('configSchema', () => {
           git: {
             sortByChanges: true,
             sortByChangesMaxCommits: 100,
+            includeDiffs: false,
           },
         },
         include: ['**/*.js', '**/*.ts'],

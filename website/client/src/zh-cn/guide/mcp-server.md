@@ -25,19 +25,19 @@ repomix --mcp
 
 1. **使用安装徽章：**
 
-   [![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Server&color=0098FF)](vscode:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)<br>
-   [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-VS_Code_Insiders?style=flat-square&label=Install%20Server&color=24bfa5)](vscode-insiders:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)
+  [![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Server&color=0098FF)](vscode:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)<br>
+  [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-VS_Code_Insiders?style=flat-square&label=Install%20Server&color=24bfa5)](vscode-insiders:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)
 
 2. **使用命令行：**
 
-   ```bash
-   code --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
-   ```
+  ```bash
+  code --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
+  ```
 
-   对于 VS Code Insiders：
-   ```bash
-   code-insiders --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
-   ```
+  对于 VS Code Insiders：
+  ```bash
+  code-insiders --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
+  ```
 
 ### 对于 Cline（VS Code 扩展）
 
@@ -134,16 +134,16 @@ repomix --mcp
 Repomix的MCP服务器提供了两个文件系统工具，允许AI助手安全地与本地文件系统交互：
 
 1. `file_system_read_file`
-   - 使用绝对路径读取文件内容
-   - 使用[Secretlint](https://github.com/secretlint/secretlint)实现安全验证
-   - 防止访问包含敏感信息的文件
-   - 对无效路径和安全问题返回清晰的错误消息
+  - 使用绝对路径读取文件内容
+  - 使用[Secretlint](https://github.com/secretlint/secretlint)实现安全验证
+  - 防止访问包含敏感信息的文件
+  - 对无效路径和安全问题返回清晰的错误消息
 
 2. `file_system_read_directory`
-   - 使用绝对路径列出目录内容
-   - 使用清晰的指示符（`[FILE]`或`[DIR]`）显示文件和目录
-   - 提供安全的目录遍历和适当的错误处理
-   - 验证路径并确保使用绝对路径
+  - 使用绝对路径列出目录内容
+  - 使用清晰的指示符（`[FILE]`或`[DIR]`）显示文件和目录
+  - 提供安全的目录遍历和适当的错误处理
+  - 验证路径并确保使用绝对路径
 
 这两个工具都包含了强大的安全措施：
 - 绝对路径验证以防止目录遍历攻击

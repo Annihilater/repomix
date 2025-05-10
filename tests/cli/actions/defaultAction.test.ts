@@ -19,6 +19,9 @@ describe('defaultAction', () => {
     vi.mocked(configLoader.loadFileConfig).mockResolvedValue({});
     vi.mocked(configLoader.mergeConfigs).mockReturnValue({
       cwd: process.cwd(),
+      input: {
+        maxFileSize: 50 * 1024 * 1024,
+      },
       output: {
         filePath: 'output.txt',
         style: 'plain',
@@ -31,9 +34,11 @@ describe('defaultAction', () => {
         removeEmptyLines: false,
         compress: false,
         copyToClipboard: false,
+        stdout: false,
         git: {
           sortByChanges: true,
           sortByChangesMaxCommits: 100,
+          includeDiffs: false,
         },
         files: true,
       },
@@ -57,6 +62,8 @@ describe('defaultAction', () => {
       fileCharCounts: {},
       fileTokenCounts: {},
       suspiciousFilesResults: [],
+      suspiciousGitDiffResults: [],
+      gitDiffTokenCount: 0,
     });
   });
 
@@ -170,6 +177,46 @@ describe('defaultAction', () => {
           output: {
             parsableStyle: false,
           },
+        }),
+      );
+    });
+  });
+
+  describe('stdout flag', () => {
+    it('should set stdout to true when --stdout flag is set', async () => {
+      const options: CliOptions = {
+        stdout: true,
+      };
+
+      await runDefaultAction(['.'], process.cwd(), options);
+
+      expect(configLoader.mergeConfigs).toHaveBeenCalledWith(
+        process.cwd(),
+        expect.anything(),
+        expect.objectContaining({
+          output: expect.objectContaining({
+            stdout: true,
+          }),
+        }),
+      );
+    });
+
+    it('should handle both --stdout and custom style', async () => {
+      const options: CliOptions = {
+        stdout: true,
+        style: 'markdown',
+      };
+
+      await runDefaultAction(['.'], process.cwd(), options);
+
+      expect(configLoader.mergeConfigs).toHaveBeenCalledWith(
+        process.cwd(),
+        expect.anything(),
+        expect.objectContaining({
+          output: expect.objectContaining({
+            stdout: true,
+            style: 'markdown',
+          }),
         }),
       );
     });

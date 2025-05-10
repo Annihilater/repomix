@@ -11,5 +11,6 @@ export default defineConfig({
       reporter: ['text', 'json', 'html'],
     },
     watch: false,
+    testTimeout: 15000,
   },
 });

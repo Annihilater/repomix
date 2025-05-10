@@ -3,9 +3,9 @@ export const queryTypescript = `
   (import_clause (identifier) @name.reference.module)) @definition.import
 
 (import_statement
-  (import_clause 
+  (import_clause
     (named_imports
-      (import_specifier 
+      (import_specifier
         name: (identifier) @name.reference.module))) @definition.import)
 
 (comment) @comment

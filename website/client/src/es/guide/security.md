@@ -45,9 +45,9 @@ Ejemplo de salida:
 ──────────────────
 2 archivo(s) sospechoso(s) detectado(s) y excluido(s):
 1. config/credentials.json
-   - Se encontró la clave de acceso de AWS
+  - Se encontró la clave de acceso de AWS
 2. .env.local
-   - Se encontró la contraseña de la base de datos
+  - Se encontró la contraseña de la base de datos
 ```
 
 ## Mejores prácticas

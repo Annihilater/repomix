@@ -99,10 +99,11 @@ For more details and examples, see [Code Compression Guide](code-compress).
 
 ### Git Integration
 
-The `output.git` configuration allows you to control how files are sorted based on Git history:
+The `output.git` configuration allows you to control how files are sorted based on Git history and include Git diffs:
 
 - `sortByChanges`: When set to `true`, files are sorted by the number of Git changes (commits that modified the file). Files with more changes appear at the bottom of the output. This can help prioritize more actively developed files. Default: `true`
 - `sortByChangesMaxCommits`: The maximum number of commits to analyze when counting file changes. Default: `100`
+- `includeDiffs`: When set to `true`, includes Git diffs in the output (includes both work tree and staged changes separately). This allows the reader to see pending changes in the repository. Default: `false`
 
 Example configuration:
 ```json
@@ -110,7 +111,8 @@ Example configuration:
   "output": {
     "git": {
       "sortByChanges": true,
-      "sortByChangesMaxCommits": 100
+      "sortByChangesMaxCommits": 100,
+      "includeDiffs": true
     }
   }
 }

@@ -25,19 +25,19 @@ VS Code에 Repomix MCP 서버를 설치하는 방법은 다음과 같습니다:
 
 1. **설치 배지 사용:**
 
-   [![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Server&color=0098FF)](vscode:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)<br>
-   [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-VS_Code_Insiders?style=flat-square&label=Install%20Server&color=24bfa5)](vscode-insiders:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)
+  [![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Server&color=0098FF)](vscode:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)<br>
+  [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-VS_Code_Insiders?style=flat-square&label=Install%20Server&color=24bfa5)](vscode-insiders:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)
 
 2. **명령줄 사용:**
 
-   ```bash
-   code --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
-   ```
+  ```bash
+  code --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
+  ```
 
-   VS Code Insiders의 경우:
-   ```bash
-   code-insiders --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
-   ```
+  VS Code Insiders의 경우:
+  ```bash
+  code-insiders --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
+  ```
 
 ### Cline(VS Code 확장)의 경우
 
@@ -134,16 +134,16 @@ MCP 서버로 실행할 때 Repomix는 다음 도구를 제공합니다:
 Repomix의 MCP 서버는 AI 어시스턴트가 로컬 파일 시스템과 안전하게 상호 작용할 수 있는 두 가지 파일 시스템 도구를 제공합니다:
 
 1. `file_system_read_file`
-   - 절대 경로를 사용하여 파일 내용 읽기
-   - [Secretlint](https://github.com/secretlint/secretlint)를 사용한 보안 검증 구현
-   - 민감한 정보가 포함된 파일에 대한 접근 방지
-   - 잘못된 경로나 보안 문제에 대한 명확한 오류 메시지 반환
+  - 절대 경로를 사용하여 파일 내용 읽기
+  - [Secretlint](https://github.com/secretlint/secretlint)를 사용한 보안 검증 구현
+  - 민감한 정보가 포함된 파일에 대한 접근 방지
+  - 잘못된 경로나 보안 문제에 대한 명확한 오류 메시지 반환
 
 2. `file_system_read_directory`
-   - 절대 경로를 사용하여 디렉토리 내용 나열
-   - 파일과 디렉토리를 명확한 지표(`[FILE]` 또는 `[DIR]`)로 표시
-   - 안전한 디렉토리 탐색과 적절한 오류 처리 제공
-   - 경로 검증 및 절대 경로 확인
+  - 절대 경로를 사용하여 디렉토리 내용 나열
+  - 파일과 디렉토리를 명확한 지표(`[FILE]` 또는 `[DIR]`)로 표시
+  - 안전한 디렉토리 탐색과 적절한 오류 처리 제공
+  - 경로 검증 및 절대 경로 확인
 
 두 도구 모두 강력한 보안 조치를 포함하고 있습니다:
 - 디렉토리 순회 공격을 방지하기 위한 절대 경로 검증

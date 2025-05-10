@@ -10,7 +10,7 @@ Run this command in your project directory:
 npx repomix
 ```
 
-That's it! You'll find a `repomix-output.txt` file containing your entire repository in an AI-friendly format.
+That's it! You'll find a `repomix-output.xml` file containing your entire repository in an AI-friendly format.
 
 You can then send this file to an AI assistant with a prompt like:
 

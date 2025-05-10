@@ -32,10 +32,10 @@ Or in `repomix.config.json`:
 1. **Binary File Exclusion**: Binary files are not included in output
 2. **Git-Aware**: Respects `.gitignore` patterns
 3. **Automated Detection**: Scans for common security issues:
-    - AWS credentials
-    - Database connection strings
-    - Authentication tokens
-    - Private keys
+  - AWS credentials
+  - Database connection strings
+  - Authentication tokens
+  - Private keys
 
 ## When Security Check Finds Issues
 
@@ -45,9 +45,9 @@ Example output:
 ──────────────────
 2 suspicious file(s) detected and excluded:
 1. config/credentials.json
-   - Found AWS access key
+  - Found AWS access key
 2. .env.local
-   - Found database password
+  - Found database password
 ```
 
 ## Best Practices

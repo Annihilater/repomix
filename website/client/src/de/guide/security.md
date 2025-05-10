@@ -32,10 +32,10 @@ Oder in `repomix.config.json`:
 1. **Ausschluss von Binärdateien**: Binärdateien werden nicht in die Ausgabe aufgenommen
 2. **Git-bewusst**: Berücksichtigt `.gitignore`-Muster
 3. **Automatische Erkennung**: Sucht nach häufigen Sicherheitsproblemen:
-    - AWS-Anmeldedaten
-    - Datenbankverbindungszeichenfolgen
-    - Authentifizierungstoken
-    - Private Schlüssel
+  - AWS-Anmeldedaten
+  - Datenbankverbindungszeichenfolgen
+  - Authentifizierungstoken
+  - Private Schlüssel
 
 ## Wenn die Sicherheitsprüfung Probleme findet
 
@@ -45,9 +45,9 @@ Beispielausgabe:
 ──────────────────
 2 verdächtige Datei(en) erkannt und ausgeschlossen:
 1. config/credentials.json
-   - AWS-Zugriffsschlüssel gefunden
+  - AWS-Zugriffsschlüssel gefunden
 2. .env.local
-   - Datenbank-Passwort gefunden
+  - Datenbank-Passwort gefunden
 ```
 
 ## Best Practices

@@ -17,6 +17,13 @@ export const registerFileSystemReadFileTool = (mcpServer: McpServer) => {
     {
       path: z.string().describe('Absolute path to the file to read'),
     },
+    {
+      title: 'Read File',
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: false,
+    },
     async ({ path: filePath }): Promise<CallToolResult> => {
       try {
         logger.trace(`Reading file at absolute path: ${filePath}`);
@@ -68,7 +75,7 @@ export const registerFileSystemReadFileTool = (mcpServer: McpServer) => {
 
         // Perform security check using the existing worker
         const config = createSecretLintConfig();
-        const securityCheckResult = await runSecretLint(filePath, fileContent, config);
+        const securityCheckResult = await runSecretLint(filePath, fileContent, 'file', config);
 
         // If security check found issues, block the file
         if (securityCheckResult !== null) {

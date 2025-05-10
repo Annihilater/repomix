@@ -1,12 +1,20 @@
 import { type Mock, describe, expect, it, vi } from 'vitest';
 import type { ProcessedFile } from '../../../src/core/file/fileTypes.js';
+import type { GitDiffResult } from '../../../src/core/file/gitDiff.js';
+import { TokenCounter } from '../../../src/core/metrics/TokenCounter.js';
 import { calculateAllFileMetrics } from '../../../src/core/metrics/calculateAllFileMetrics.js';
 import { calculateMetrics } from '../../../src/core/metrics/calculateMetrics.js';
-import { TokenCounter } from '../../../src/core/tokenCount/tokenCount.js';
 import type { RepomixProgressCallback } from '../../../src/shared/types.js';
 import { createMockConfig } from '../../testing/testUtils.js';
 
-vi.mock('../../../src/core/tokenCount/tokenCount.js');
+vi.mock('../../../src/core/metrics/TokenCounter.js', () => {
+  return {
+    TokenCounter: vi.fn().mockImplementation(() => ({
+      countTokens: vi.fn().mockReturnValue(10),
+      free: vi.fn(),
+    })),
+  };
+});
 vi.mock('../../../src/core/metrics/aggregateMetrics.js');
 vi.mock('../../../src/core/metrics/calculateAllFileMetrics.js');
 
@@ -18,12 +26,6 @@ describe('calculateMetrics', () => {
     ];
     const output = 'a'.repeat(300);
     const progressCallback: RepomixProgressCallback = vi.fn();
-
-    const mockTokenCounter = {
-      countTokens: vi.fn(),
-      free: vi.fn(),
-    };
-    (TokenCounter as unknown as Mock).mockImplementation(() => mockTokenCounter);
 
     const fileMetrics = [
       { path: 'file1.txt', charCount: 100, tokenCount: 10 },
@@ -43,11 +45,14 @@ describe('calculateMetrics', () => {
         'file1.txt': 10,
         'file2.txt': 20,
       },
+      gitDiffTokenCount: 0,
     };
 
     const config = createMockConfig();
 
-    const result = await calculateMetrics(processedFiles, output, progressCallback, config, {
+    const gitDiffResult: GitDiffResult | undefined = undefined;
+
+    const result = await calculateMetrics(processedFiles, output, progressCallback, config, gitDiffResult, {
       calculateAllFileMetrics,
       calculateOutputMetrics: () => Promise.resolve(30),
     });

@@ -28,7 +28,7 @@ features:
 
 ## Início Rápido
 
-Depois de gerar um arquivo compactado (`repomix-output.txt`) usando o Repomix, você pode enviá-lo para um assistente de IA com um prompt como:
+Depois de gerar um arquivo compactado (`repomix-output.xml`) usando o Repomix, você pode enviá-lo para um assistente de IA (como ChatGPT, Claude) com um prompt como:
 
 ```
 Este arquivo contém todos os arquivos do repositório combinados em um.
@@ -45,9 +45,9 @@ Ao discutir mudanças específicas, a IA pode ajudar a gerar código. Com recurs
 
 Feliz codificação! 🚀
 
-## Guia do Usuário Avançado
+## Usando a Ferramenta CLI {#using-the-cli-tool}
 
-Para usuários avançados que precisam de mais controle, o Repomix oferece extensas opções de personalização através de sua interface CLI.
+O Repomix pode ser usado como uma ferramenta de linha de comando, oferecendo recursos poderosos e opções de personalização.
 
 ### Início Rápido
 
@@ -73,7 +73,7 @@ brew install repomix
 repomix
 ```
 
-É isso! O Repomix irá gerar um arquivo `repomix-output.txt` no seu diretório atual, contendo todo o seu repositório em um formato amigável para IA.
+É isso! O Repomix irá gerar um arquivo `repomix-output.xml` no seu diretório atual, contendo todo o seu repositório em um formato amigável para IA.
 
 ### Uso
 
@@ -179,8 +179,8 @@ Crie um `repomix.config.json` para configurações persistentes:
 ```
 
 ### Mais Exemplos
-::: tip
-💡 Confira nosso [repositório GitHub](https://github.com/yamadashy/repomix) para documentação completa e mais exemplos!
+::: tip Precisa de mais ajuda? 💡
+Consulte nosso [guia](./guide/) para instruções detalhadas, ou visite nosso [repositório GitHub](https://github.com/yamadashy/repomix) para mais exemplos e código-fonte.
 :::
 
 </div>

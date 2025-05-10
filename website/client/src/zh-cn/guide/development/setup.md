@@ -105,16 +105,16 @@ pnpm run website:build
 ### 常见问题
 
 1. **Node.js 版本**
-   - 确保使用 Node.js ≥ 18.0.0
-   - 使用 `node --version` 检查版本
+  - 确保使用 Node.js ≥ 18.0.0
+  - 使用 `node --version` 检查版本
 
 2. **依赖问题**
-   - 删除 `node_modules` 和锁定文件
-   - 重新运行 `pnpm install`
+  - 删除 `node_modules` 和锁定文件
+  - 重新运行 `pnpm install`
 
 3. **构建错误**
-   - 运行 `pnpm run clean`
-   - 重新构建项目 `pnpm run build`
+  - 运行 `pnpm run clean`
+  - 重新构建项目 `pnpm run build`
 
 ### 支持
 

@@ -5,6 +5,7 @@
 
 ## Options de sortie
 - `-o, --output <fichier>`: Nom du fichier de sortie (par défaut: `repomix-output.txt`)
+- `--stdout`: Sortie vers la sortie standard au lieu d'écrire dans un fichier (ne peut pas être utilisé avec l'option `--output`)
 - `--style <type>`: Style de sortie (`plain`, `xml`, `markdown`) (par défaut: `xml`)
 - `--parsable-style`: Activer une sortie analysable basée sur le schéma du style choisi (par défaut: `false`)
 - `--compress`: Effectuer une extraction intelligente du code, en se concentrant sur les signatures essentielles de fonctions et de classes tout en supprimant les détails d'implémentation. Pour plus de détails et d'exemples, voir [Guide de compression de code](code-compress).
@@ -18,6 +19,7 @@
 - `--header-text <texte>`: Texte personnalisé à inclure dans l'en-tête du fichier
 - `--instruction-file-path <chemin>`: Chemin vers un fichier contenant des instructions personnalisées détaillées
 - `--include-empty-directories`: Inclure les répertoires vides dans la sortie (par défaut: `false`)
+- `--include-diffs`: Inclure les différences git dans la sortie (inclut séparément les modifications de l'arbre de travail et les modifications indexées) (par défaut: `false`)
 
 ## Options de filtrage
 - `--include <motifs>`: Motifs d'inclusion (séparés par des virgules)
@@ -50,16 +52,28 @@
 ```bash
 # Utilisation de base
 repomix
+
 # Sortie personnalisée
 repomix -o output.xml --style xml
+
+# Sortie vers la sortie standard
+repomix --stdout > custom-output.txt
+
+# Envoi de la sortie vers la sortie standard, puis redirection vers une autre commande (par exemple, simonw/llm)
+repomix --stdout | llm "Veuillez expliquer ce que fait ce code"
+
 # Sortie personnalisée avec compression
 repomix --compress
+
 # Traiter des fichiers spécifiques
 repomix --include "src/**/*.ts" --ignore "**/*.test.ts"
+
 # Dépôt distant avec branche
 repomix --remote https://github.com/user/repo/tree/main
+
 # Dépôt distant avec commit
 repomix --remote https://github.com/user/repo/commit/836abcd7335137228ad77feb28655d85712680f1
+
 # Dépôt distant avec format abrégé
 repomix --remote user/repo
 ```

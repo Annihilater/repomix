@@ -46,6 +46,8 @@ describe('remoteAction functions', () => {
                 fileCharCounts: {},
                 fileTokenCounts: {},
                 suspiciousFilesResults: [],
+                suspiciousGitDiffResults: [],
+                gitDiffTokenCount: 0,
               },
               config: createMockConfig(),
             } satisfies DefaultActionRunnerResult;

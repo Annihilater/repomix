@@ -32,5 +32,9 @@ export const initPiscina = (numOfTasks: number, workerPath: string): Piscina => 
     minThreads,
     maxThreads,
     idleTimeout: 5000,
+    env: {
+      ...process.env,
+      REPOMIX_LOGLEVEL: logger.getLogLevel().toString(),
+    },
   });
 };

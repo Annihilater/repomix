@@ -45,9 +45,9 @@ Exemple de sortie:
 ────────────────────────────
 2 fichier(s) suspect(s) détecté(s) et exclu(s):
 1. config/credentials.json
-   - Clé d'accès AWS trouvée
+  - Clé d'accès AWS trouvée
 2. .env.local
-   - Mot de passe de base de données trouvé
+  - Mot de passe de base de données trouvé
 ```
 
 ## Meilleures pratiques

@@ -1,22 +1,16 @@
 import path from 'node:path';
 import pc from 'picocolors';
 import type { RepomixConfigMerged } from '../config/configSchema.js';
+import type { PackResult } from '../core/packager.js';
 import type { SuspiciousFileResult } from '../core/security/securityCheck.js';
 import { logger } from '../shared/logger.js';
 
-export const printSummary = (
-  totalFiles: number,
-  totalCharacters: number,
-  totalTokens: number,
-  outputPath: string,
-  suspiciousFilesResults: SuspiciousFileResult[],
-  config: RepomixConfigMerged,
-) => {
+export const printSummary = (packResult: PackResult, config: RepomixConfigMerged) => {
   let securityCheckMessage = '';
   if (config.security.enableSecurityCheck) {
-    if (suspiciousFilesResults.length > 0) {
+    if (packResult.suspiciousFilesResults.length > 0) {
       securityCheckMessage = pc.yellow(
-        `${suspiciousFilesResults.length.toLocaleString()} suspicious file(s) detected and excluded`,
+        `${packResult.suspiciousFilesResults.length.toLocaleString()} suspicious file(s) detected and excluded`,
       );
     } else {
       securityCheckMessage = pc.white('✔ No suspicious files detected');
@@ -27,16 +21,29 @@ export const printSummary = (
 
   logger.log(pc.white('📊 Pack Summary:'));
   logger.log(pc.dim('────────────────'));
-  logger.log(`${pc.white('  Total Files:')} ${pc.white(totalFiles.toLocaleString())} files`);
-  logger.log(`${pc.white('  Total Chars:')} ${pc.white(totalCharacters.toLocaleString())} chars`);
-  logger.log(`${pc.white(' Total Tokens:')} ${pc.white(totalTokens.toLocaleString())} tokens`);
-  logger.log(`${pc.white('       Output:')} ${pc.white(outputPath)}`);
+  logger.log(`${pc.white('  Total Files:')} ${pc.white(packResult.totalFiles.toLocaleString())} files`);
+  logger.log(`${pc.white('  Total Chars:')} ${pc.white(packResult.totalCharacters.toLocaleString())} chars`);
+  logger.log(`${pc.white(' Total Tokens:')} ${pc.white(packResult.totalTokens.toLocaleString())} tokens`);
+  logger.log(`${pc.white('       Output:')} ${pc.white(config.output.filePath)}`);
   logger.log(`${pc.white('     Security:')} ${pc.white(securityCheckMessage)}`);
+
+  if (config.output.git?.includeDiffs) {
+    let gitDiffsMessage = '';
+    if (packResult.gitDiffTokenCount) {
+      gitDiffsMessage = pc.white(
+        `✔ Git diffs included ${pc.dim(`(${packResult.gitDiffTokenCount.toLocaleString()} tokens)`)}`,
+      );
+    } else {
+      gitDiffsMessage = pc.dim('✖ No git diffs included');
+    }
+    logger.log(`${pc.white('    Git Diffs:')} ${gitDiffsMessage}`);
+  }
 };
 
 export const printSecurityCheck = (
   rootDir: string,
   suspiciousFilesResults: SuspiciousFileResult[],
+  suspiciousGitDiffResults: SuspiciousFileResult[],
   config: RepomixConfigMerged,
 ) => {
   if (!config.security.enableSecurityCheck) {
@@ -46,6 +53,7 @@ export const printSecurityCheck = (
   logger.log(pc.white('🔎 Security Check:'));
   logger.log(pc.dim('──────────────────'));
 
+  // Print results for files
   if (suspiciousFilesResults.length === 0) {
     logger.log(`${pc.green('✔')} ${pc.white('No suspicious files detected.')}`);
   } else {
@@ -57,6 +65,18 @@ export const printSecurityCheck = (
     });
     logger.log(pc.yellow('\nThese files have been excluded from the output for security reasons.'));
     logger.log(pc.yellow('Please review these files for potential sensitive information.'));
+  }
+
+  // Print results for git diffs
+  if (suspiciousGitDiffResults.length > 0) {
+    logger.log('');
+    logger.log(pc.yellow(`${suspiciousGitDiffResults.length} security issue(s) found in Git diffs:`));
+    suspiciousGitDiffResults.forEach((suspiciousResult, index) => {
+      logger.log(`${pc.white(`${index + 1}.`)} ${pc.white(suspiciousResult.filePath)}`);
+      logger.log(pc.dim(`   - ${suspiciousResult.messages.join('\n   - ')}`));
+    });
+    logger.log(pc.yellow('\nNote: Git diffs with security issues are still included in the output.'));
+    logger.log(pc.yellow('Please review the diffs before sharing the output.'));
   }
 };
 
@@ -73,11 +93,15 @@ export const printTopFiles = (
     .sort((a, b) => b[1] - a[1])
     .slice(0, topFilesLength);
 
+  // Calculate total token count
+  const totalTokens = Object.values(fileTokenCounts).reduce((sum, count) => sum + count, 0);
+
   topFiles.forEach(([filePath, charCount], index) => {
     const tokenCount = fileTokenCounts[filePath];
+    const percentageOfTotal = totalTokens > 0 ? Number(((tokenCount / totalTokens) * 100).toFixed(1)) : 0;
     const indexString = `${index + 1}.`.padEnd(3, ' ');
     logger.log(
-      `${pc.white(`${indexString}`)} ${pc.white(filePath)} ${pc.dim(`(${charCount.toLocaleString()} chars, ${tokenCount.toLocaleString()} tokens)`)}`,
+      `${pc.white(`${indexString}`)} ${pc.white(filePath)} ${pc.dim(`(${charCount.toLocaleString()} chars, ${tokenCount.toLocaleString()} tokens, ${percentageOfTotal}%)`)}`,
     );
   });
 };

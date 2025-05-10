@@ -36,6 +36,13 @@ export const registerPackCodebaseTool = (mcpServer: McpServer) => {
         .default(10)
         .describe('Number of top files to display in the metrics (default: 10)'),
     },
+    {
+      title: 'Pack Local Codebase',
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: false,
+      openWorldHint: false,
+    },
     async ({ directory, compress, includePatterns, ignorePatterns, topFilesLength }): Promise<CallToolResult> => {
       let tempDir = '';
 

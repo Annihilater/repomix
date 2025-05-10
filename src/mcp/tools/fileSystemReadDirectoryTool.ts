@@ -15,6 +15,13 @@ export const registerFileSystemReadDirectoryTool = (mcpServer: McpServer) => {
     {
       path: z.string().describe('Absolute path to the directory to list'),
     },
+    {
+      title: 'Read Directory',
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: false,
+    },
     async ({ path: directoryPath }): Promise<CallToolResult> => {
       try {
         logger.trace(`Listing directory at absolute path: ${directoryPath}`);

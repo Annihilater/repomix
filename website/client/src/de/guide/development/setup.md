@@ -125,16 +125,16 @@ pnpm publish
 ### Häufige Probleme
 
 1. **Node.js Version**
-   - Stellen Sie sicher, dass Sie Node.js ≥ 18.0.0 verwenden
-   - Überprüfen Sie mit `node --version`
+  - Stellen Sie sicher, dass Sie Node.js ≥ 18.0.0 verwenden
+  - Überprüfen Sie mit `node --version`
 
 2. **Abhängigkeitsprobleme**
-   - Löschen Sie `node_modules` und den Lock-File
-   - Führen Sie `pnpm install` erneut aus
+  - Löschen Sie `node_modules` und den Lock-File
+  - Führen Sie `pnpm install` erneut aus
 
 3. **Build-Fehler**
-   - Führen Sie `pnpm run clean` aus
-   - Bauen Sie das Projekt neu mit `pnpm run build`
+  - Führen Sie `pnpm run clean` aus
+  - Bauen Sie das Projekt neu mit `pnpm run build`
 
 ### Support
 

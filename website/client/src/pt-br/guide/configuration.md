@@ -99,10 +99,11 @@ Para mais detalhes e exemplos, consulte o [Guia de Compressão de Código](code-
 
 ### Integração com Git
 
-A configuração `output.git` permite controlar como os arquivos são ordenados com base no histórico do Git:
+A configuração `output.git` permite controlar como os arquivos são ordenados com base no histórico do Git e como incluir diferenças do Git:
 
 - `sortByChanges`: Quando configurado como `true`, os arquivos são ordenados pelo número de alterações no Git (commits que modificaram o arquivo). Arquivos com mais alterações aparecem no final da saída. Isso ajuda a priorizar arquivos mais ativamente desenvolvidos. Padrão: `true`
 - `sortByChangesMaxCommits`: O número máximo de commits a analisar ao contar as alterações de arquivos. Padrão: `100`
+- `includeDiffs`: Quando configurado como `true`, inclui diferenças do Git na saída (inclui separadamente tanto as alterações da árvore de trabalho quanto as alterações preparadas). Isso permite que o leitor veja as alterações pendentes no repositório. Padrão: `false`
 
 Exemplo de configuração:
 ```json
@@ -110,7 +111,8 @@ Exemplo de configuração:
   "output": {
     "git": {
       "sortByChanges": true,
-      "sortByChangesMaxCommits": 100
+      "sortByChangesMaxCommits": 100,
+      "includeDiffs": true
     }
   }
 }

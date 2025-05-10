@@ -5,6 +5,7 @@
 
 ## Opciones de Salida
 - `-o, --output <file>`: Nombre del archivo de salida (predeterminado: `repomix-output.txt`)
+- `--stdout`: Salida a la salida estándar en lugar de escribir a un archivo (no puede usarse con la opción `--output`)
 - `--style <type>`: Estilo de salida (`plain`, `xml`, `markdown`) (predeterminado: `xml`)
 - `--parsable-style`: Habilita la salida analizable basada en el esquema del estilo elegido (predeterminado: `false`)
 - `--compress`: Realiza una extracción inteligente de código, centrándose en las firmas de funciones y clases mientras elimina los detalles de implementación. Para más detalles y ejemplos, consulte la [Guía de Compresión de Código](code-compress)
@@ -18,6 +19,7 @@
 - `--header-text <text>`: Texto personalizado para incluir en el encabezado del archivo
 - `--instruction-file-path <path>`: Ruta al archivo con instrucciones personalizadas detalladas
 - `--include-empty-directories`: Incluye directorios vacíos en la salida (predeterminado: `false`)
+- `--include-diffs`: Incluye las diferencias de git en la salida (incluye por separado los cambios del árbol de trabajo y los cambios preparados) (predeterminado: `false`)
 
 ## Opciones de Filtrado
 - `--include <patterns>`: Patrones a incluir (separados por comas)
@@ -53,6 +55,12 @@ repomix
 
 # Salida personalizada
 repomix -o output.xml --style xml
+
+# Salida a la salida estándar
+repomix --stdout > custom-output.txt
+
+# Enviar salida a la salida estándar, luego canalizar a otro comando (por ejemplo, simonw/llm)
+repomix --stdout | llm "Por favor explica qué hace este código"
 
 # Salida personalizada con compresión
 repomix --compress

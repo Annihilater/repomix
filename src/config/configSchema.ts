@@ -14,6 +14,11 @@ export const defaultFilePathMap: Record<RepomixOutputStyle, string> = {
 
 // Base config schema
 export const repomixConfigBaseSchema = z.object({
+  input: z
+    .object({
+      maxFileSize: z.number().optional(),
+    })
+    .optional(),
   output: z
     .object({
       filePath: z.string().optional(),
@@ -35,6 +40,7 @@ export const repomixConfigBaseSchema = z.object({
         .object({
           sortByChanges: z.boolean().optional(),
           sortByChangesMaxCommits: z.number().optional(),
+          includeDiffs: z.boolean().optional(),
         })
         .optional(),
     })
@@ -61,6 +67,15 @@ export const repomixConfigBaseSchema = z.object({
 
 // Default config schema with default values
 export const repomixConfigDefaultSchema = z.object({
+  input: z
+    .object({
+      maxFileSize: z
+        .number()
+        .int()
+        .min(1)
+        .default(50 * 1024 * 1024), // Default: 50MB
+    })
+    .default({}),
   output: z
     .object({
       filePath: z.string().default(defaultFilePathMap.xml),
@@ -82,6 +97,7 @@ export const repomixConfigDefaultSchema = z.object({
         .object({
           sortByChanges: z.boolean().default(true),
           sortByChangesMaxCommits: z.number().int().min(1).default(100),
+          includeDiffs: z.boolean().default(false),
         })
         .default({}),
     })
@@ -109,10 +125,21 @@ export const repomixConfigDefaultSchema = z.object({
     .default({}),
 });
 
+// File-specific schema. Add options for file path and style
 export const repomixConfigFileSchema = repomixConfigBaseSchema;
 
-export const repomixConfigCliSchema = repomixConfigBaseSchema;
+// CLI-specific schema. Add options for standard output mode
+export const repomixConfigCliSchema = repomixConfigBaseSchema.and(
+  z.object({
+    output: z
+      .object({
+        stdout: z.boolean().optional(),
+      })
+      .optional(),
+  }),
+);
 
+// Merged schema for all configurations
 export const repomixConfigMergedSchema = repomixConfigDefaultSchema
   .and(repomixConfigFileSchema)
   .and(repomixConfigCliSchema)

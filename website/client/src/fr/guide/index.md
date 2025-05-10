@@ -10,7 +10,7 @@ Exécutez cette commande dans le répertoire de votre projet:
 npx repomix
 ```
 
-C'est tout! Vous trouverez un fichier `repomix-output.txt` contenant l'intégralité de votre dépôt dans un format adapté à l'IA.
+C'est tout! Vous trouverez un fichier `repomix-output.xml` contenant l'intégralité de votre dépôt dans un format adapté à l'IA.
 
 Vous pouvez ensuite envoyer ce fichier à un assistant IA avec une instruction comme:
 

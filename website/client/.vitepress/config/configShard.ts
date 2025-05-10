@@ -7,6 +7,7 @@ import { configJaSearch } from './configJa';
 import { configKoSearch } from './configKo';
 import { configPtBrSearch } from './configPtBr';
 import { configZhCnSearch } from './configZhCn';
+import { configZhTwSearch } from './configZhTw';
 
 const googleAnalyticsTag = 'G-7PTT4PLC69';
 
@@ -69,6 +70,7 @@ export const configShard = defineConfig({
           ...configKoSearch,
           ...configPtBrSearch,
           ...configZhCnSearch,
+          ...configZhTwSearch,
         },
       },
     },

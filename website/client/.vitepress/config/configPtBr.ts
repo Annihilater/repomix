@@ -26,6 +26,7 @@ export const configPtBr = defineConfig({
             { text: 'Compressão de Código', link: '/pt-br/guide/code-compress' },
             { text: 'Segurança', link: '/pt-br/guide/security' },
             { text: 'Servidor MCP', link: '/pt-br/guide/mcp-server' },
+            { text: 'GitHub Actions', link: '/pt-br/guide/github-actions' },
             {
               text: 'Dicas e Truques',
               items: [{ text: 'Melhores Práticas', link: '/pt-br/guide/tips/best-practices' }],

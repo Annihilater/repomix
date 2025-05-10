@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import * as defaultAction from '../../src/cli/actions/defaultAction.js';
 import * as initAction from '../../src/cli/actions/initAction.js';
 import * as remoteAction from '../../src/cli/actions/remoteAction.js';
@@ -33,6 +33,7 @@ vi.mock('../../src/shared/logger', () => ({
     }),
     getLogLevel: vi.fn(() => logLevel),
   },
+  setLogLevelByEnv: vi.fn(),
 }));
 
 vi.mock('commander', () => ({
@@ -57,9 +58,13 @@ describe('cliRun', () => {
     vi.mocked(defaultAction.runDefaultAction).mockResolvedValue({
       config: {
         cwd: process.cwd(),
+        input: {
+          maxFileSize: 50 * 1024 * 1024,
+        },
         output: {
           filePath: 'repomix-output.txt',
           style: 'plain',
+          stdout: false,
           parsableStyle: false,
           fileSummary: true,
           directoryStructure: true,
@@ -73,6 +78,7 @@ describe('cliRun', () => {
           git: {
             sortByChanges: true,
             sortByChangesMaxCommits: 100,
+            includeDiffs: false,
           },
         },
         include: [],
@@ -95,14 +101,20 @@ describe('cliRun', () => {
         fileCharCounts: {},
         fileTokenCounts: {},
         suspiciousFilesResults: [],
+        gitDiffTokenCount: 0,
+        suspiciousGitDiffResults: [],
       } satisfies PackResult,
     });
     vi.mocked(initAction.runInitAction).mockResolvedValue();
     vi.mocked(remoteAction.runRemoteAction).mockResolvedValue({
       config: {
         cwd: process.cwd(),
+        input: {
+          maxFileSize: 50 * 1024 * 1024,
+        },
         output: {
           filePath: 'repomix-output.txt',
+          stdout: false,
           style: 'plain',
           parsableStyle: false,
           fileSummary: true,
@@ -117,6 +129,7 @@ describe('cliRun', () => {
           git: {
             sortByChanges: true,
             sortByChangesMaxCommits: 100,
+            includeDiffs: false,
           },
         },
         include: [],
@@ -139,6 +152,8 @@ describe('cliRun', () => {
         fileCharCounts: {},
         fileTokenCounts: {},
         suspiciousFilesResults: [],
+        gitDiffTokenCount: 0,
+        suspiciousGitDiffResults: [],
       } satisfies PackResult,
     });
     vi.mocked(versionAction.runVersionAction).mockResolvedValue();
@@ -342,6 +357,56 @@ describe('cliRun', () => {
       await runCli(['.'], process.cwd(), options);
 
       expect(logger.getLogLevel()).toBe(repomixLogLevels.INFO);
+    });
+  });
+
+  describe('stdout mode', () => {
+    const originalIsTTY = process.stdout.isTTY;
+
+    afterEach(() => {
+      process.stdout.isTTY = originalIsTTY;
+    });
+
+    test('should handle --stdout flag', async () => {
+      const options: CliOptions = {
+        stdout: true,
+      };
+
+      await runCli(['.'], process.cwd(), options);
+
+      expect(defaultAction.runDefaultAction).toHaveBeenCalledWith(
+        ['.'],
+        process.cwd(),
+        expect.objectContaining({
+          stdout: true,
+        }),
+      );
+    });
+
+    test('should not enable stdout mode when explicitly setting output', async () => {
+      // Mock pipe detection
+      process.stdout.isTTY = false;
+      const options: CliOptions = {
+        output: 'custom-output.txt',
+      };
+
+      await runCli(['.'], process.cwd(), options);
+
+      // stdout should not be set
+      expect(defaultAction.runDefaultAction).toHaveBeenCalledWith(
+        ['.'],
+        process.cwd(),
+        expect.objectContaining({
+          output: 'custom-output.txt',
+        }),
+      );
+      expect(defaultAction.runDefaultAction).not.toHaveBeenCalledWith(
+        ['.'],
+        process.cwd(),
+        expect.objectContaining({
+          stdout: true,
+        }),
+      );
     });
   });
 });

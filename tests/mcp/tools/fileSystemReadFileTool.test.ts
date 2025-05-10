@@ -23,7 +23,7 @@ describe('FileSystemReadFileTool', () => {
   beforeEach(() => {
     vi.resetAllMocks();
     registerFileSystemReadFileTool(mockServer);
-    toolHandler = (mockServer.tool as ReturnType<typeof vi.fn>).mock.calls[0][3];
+    toolHandler = (mockServer.tool as ReturnType<typeof vi.fn>).mock.calls[0][4];
 
     // デフォルトのpath.isAbsoluteの動作をモック
     vi.mocked(path.isAbsolute).mockImplementation((p: string) => p.startsWith('/'));
@@ -34,6 +34,7 @@ describe('FileSystemReadFileTool', () => {
       'file_system_read_file',
       'Read a file using an absolute path with security validation.',
       expect.any(Object),
+      expect.any(Object), // annotations
       expect.any(Function),
     );
   });

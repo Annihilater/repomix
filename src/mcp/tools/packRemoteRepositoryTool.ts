@@ -36,6 +36,13 @@ export const registerPackRemoteRepositoryTool = (mcpServer: McpServer) => {
         .default(10)
         .describe('Number of top files to display in the metrics (default: 10)'),
     },
+    {
+      title: 'Pack Remote Repository',
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: false,
+      openWorldHint: true,
+    },
     async ({ remote, compress, includePatterns, ignorePatterns, topFilesLength }): Promise<CallToolResult> => {
       let tempDir = '';
 

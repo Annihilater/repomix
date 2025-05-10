@@ -6,11 +6,12 @@
     type="submit"
   >
     {{ loading ? 'Processing...' : 'Pack' }}
-    <svg v-if="!loading"
-         class="pack-button-icon"
-         width="20"
-         height="20"
-         viewBox="96.259 93.171 300 300"
+    <svg
+      v-if="!loading"
+      class="pack-button-icon"
+      width="20"
+      height="20"
+      viewBox="96.259 93.171 300 300"
     >
       <g transform="matrix(1.160932, 0, 0, 1.160932, 97.635941, 94.725143)">
         <path

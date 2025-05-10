@@ -5,6 +5,7 @@
 
 ## 出力オプション
 - `-o, --output <file>`: 出力ファイル名（デフォルト: `repomix-output.txt`）
+- `--stdout`: ファイルに書き込む代わりに標準出力に出力（`--output`オプションと併用不可）
 - `--style <type>`: 出力形式（`plain`、`xml`、`markdown`）（デフォルト: `xml`）
 - `--parsable-style`: 選択した形式のスキーマに基づいて解析可能な出力を有効化（デフォルト: `false`）
 - `--compress`: 関数やクラスのシグネチャなどの重要な構造を保持しながら、実装の詳細を削除するインテリジェントなコード抽出を実行します。詳細と例については、[コード圧縮ガイド](code-compress)を参照してください。
@@ -18,6 +19,8 @@
 - `--header-text <text>`: ファイルヘッダーに含めるカスタムテキスト
 - `--instruction-file-path <path>`: 詳細なカスタム指示を含むファイルのパス
 - `--include-empty-directories`: 空のディレクトリを出力に含める（デフォルト: `false`）
+- `--include-diffs`: Gitの差分を出力に含める（ワークツリーとステージングされた変更が別々に含まれます）（デフォルト: `false`）
+- `--no-git-sort-by-changes`: Gitの変更回数によるファイルのソートを無効化（デフォルト: `true`）
 
 ## フィルターオプション
 - `--include <patterns>`: 含めるパターン（カンマ区切り）
@@ -53,6 +56,12 @@ repomix
 
 # カスタム出力
 repomix -o output.xml --style xml
+
+# 標準出力への出力
+repomix --stdout > custom-output.txt
+
+# 標準出力への出力後、他のコマンドへパイプ（例：simonw/llm）
+repomix --stdout | llm "このコードについて説明してください"
 
 # 圧縮を使用したカスタム出力
 repomix --compress

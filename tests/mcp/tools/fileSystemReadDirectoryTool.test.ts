@@ -21,7 +21,7 @@ describe('FileSystemReadDirectoryTool', () => {
   beforeEach(() => {
     vi.resetAllMocks();
     registerFileSystemReadDirectoryTool(mockServer);
-    toolHandler = (mockServer.tool as ReturnType<typeof vi.fn>).mock.calls[0][3];
+    toolHandler = (mockServer.tool as ReturnType<typeof vi.fn>).mock.calls[0][4];
 
     // デフォルトのpath.isAbsoluteの動作をモック
     vi.mocked(path.isAbsolute).mockImplementation((p: string) => p.startsWith('/'));
@@ -32,6 +32,7 @@ describe('FileSystemReadDirectoryTool', () => {
       'file_system_read_directory',
       'List contents of a directory using an absolute path.',
       expect.any(Object),
+      expect.any(Object), // annotations
       expect.any(Function),
     );
   });

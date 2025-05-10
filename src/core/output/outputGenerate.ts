@@ -7,6 +7,7 @@ import { RepomixError } from '../../shared/errorHandle.js';
 import { type FileSearchResult, searchFiles } from '../file/fileSearch.js';
 import { generateTreeString } from '../file/fileTreeGenerate.js';
 import type { ProcessedFile } from '../file/fileTypes.js';
+import type { GitDiffResult } from '../file/gitDiff.js';
 import type { OutputGeneratorContext, RenderContext } from './outputGeneratorTypes.js';
 import { sortOutputFiles } from './outputSort.js';
 import {
@@ -29,7 +30,7 @@ const calculateMarkdownDelimiter = (files: ReadonlyArray<ProcessedFile>): string
 
 const createRenderContext = (outputGeneratorContext: OutputGeneratorContext): RenderContext => {
   return {
-    generationHeader: generateHeader(outputGeneratorContext.config, outputGeneratorContext.generationDate), // configを追加
+    generationHeader: generateHeader(outputGeneratorContext.config, outputGeneratorContext.generationDate),
     summaryPurpose: generateSummaryPurpose(),
     summaryFileFormat: generateSummaryFileFormat(),
     summaryUsageGuidelines: generateSummaryUsageGuidelines(
@@ -46,6 +47,9 @@ const createRenderContext = (outputGeneratorContext: OutputGeneratorContext): Re
     filesEnabled: outputGeneratorContext.config.output.files,
     escapeFileContent: outputGeneratorContext.config.output.parsableStyle,
     markdownCodeBlockDelimiter: calculateMarkdownDelimiter(outputGeneratorContext.processedFiles),
+    gitDiffEnabled: outputGeneratorContext.config.output.git?.includeDiffs,
+    gitDiffWorkTree: outputGeneratorContext.gitDiffResult?.workTreeDiffContent,
+    gitDiffStaged: outputGeneratorContext.gitDiffResult?.stagedDiffContent,
   };
 };
 
@@ -77,6 +81,12 @@ const generateParsableXmlOutput = async (renderContext: RenderContext): Promise<
               '#text': file.content,
               '@_path': file.path,
             })),
+          }
+        : undefined,
+      git_diffs: renderContext.gitDiffEnabled
+        ? {
+            git_diff_work_tree: renderContext.gitDiffWorkTree,
+            git_diff_staged: renderContext.gitDiffStaged,
           }
         : undefined,
       instruction: renderContext.instruction ? renderContext.instruction : undefined,
@@ -120,6 +130,7 @@ export const generateOutput = async (
   config: RepomixConfigMerged,
   processedFiles: ProcessedFile[],
   allFilePaths: string[],
+  gitDiffResult: GitDiffResult | undefined = undefined,
   deps = {
     buildOutputGeneratorContext,
     generateHandlebarOutput,
@@ -135,6 +146,7 @@ export const generateOutput = async (
     config,
     allFilePaths,
     sortedProcessedFiles,
+    gitDiffResult,
   );
   const renderContext = createRenderContext(outputGeneratorContext);
 
@@ -154,6 +166,7 @@ export const buildOutputGeneratorContext = async (
   config: RepomixConfigMerged,
   allFilePaths: string[],
   processedFiles: ProcessedFile[],
+  gitDiffResult: GitDiffResult | undefined = undefined,
 ): Promise<OutputGeneratorContext> => {
   let repositoryInstruction = '';
 
@@ -190,5 +203,6 @@ export const buildOutputGeneratorContext = async (
     processedFiles,
     config,
     instruction: repositoryInstruction,
+    gitDiffResult,
   };
 };

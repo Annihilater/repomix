@@ -2,6 +2,7 @@ import path from 'node:path';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { printCompletion, printSecurityCheck, printSummary, printTopFiles } from '../../src/cli/cliPrint.js';
 import type { SuspiciousFileResult } from '../../src/core/security/securityCheck.js';
+import type { PackResult } from '../../src/index.js';
 import { logger } from '../../src/shared/logger.js';
 import { createMockConfig } from '../testing/testUtils.js';
 
@@ -29,10 +30,21 @@ describe('cliPrint', () => {
         security: { enableSecurityCheck: true },
       });
       const suspiciousFiles: SuspiciousFileResult[] = [
-        { filePath: 'suspicious.txt', messages: ['Contains sensitive data'] },
+        { filePath: 'suspicious.txt', messages: ['Contains sensitive data'], type: 'file' },
       ];
 
-      printSummary(10, 1000, 200, 'output.txt', suspiciousFiles, config);
+      const packResult: PackResult = {
+        totalFiles: 10,
+        totalCharacters: 1000,
+        totalTokens: 200,
+        fileCharCounts: { 'file1.txt': 100 },
+        fileTokenCounts: { 'file1.txt': 50 },
+        suspiciousFilesResults: suspiciousFiles,
+        suspiciousGitDiffResults: [],
+        gitDiffTokenCount: 0,
+      };
+
+      printSummary(packResult, config);
 
       expect(logger.log).toHaveBeenCalledWith(expect.stringContaining('1 suspicious file(s) detected and excluded'));
     });
@@ -42,7 +54,18 @@ describe('cliPrint', () => {
         security: { enableSecurityCheck: false },
       });
 
-      printSummary(10, 1000, 200, 'output.txt', [], config);
+      const packResult: PackResult = {
+        totalFiles: 10,
+        totalCharacters: 1000,
+        totalTokens: 200,
+        fileCharCounts: { 'file1.txt': 100 },
+        fileTokenCounts: { 'file1.txt': 50 },
+        suspiciousFilesResults: [],
+        suspiciousGitDiffResults: [],
+        gitDiffTokenCount: 0,
+      };
+
+      printSummary(packResult, config);
 
       expect(logger.log).toHaveBeenCalledWith(expect.stringContaining('Security check disabled'));
     });
@@ -54,7 +77,7 @@ describe('cliPrint', () => {
         security: { enableSecurityCheck: false },
       });
 
-      printSecurityCheck('/root', [], config);
+      printSecurityCheck('/root', [], [], config);
       expect(logger.log).not.toHaveBeenCalled();
     });
 
@@ -63,7 +86,7 @@ describe('cliPrint', () => {
         security: { enableSecurityCheck: true },
       });
 
-      printSecurityCheck('/root', [], config);
+      printSecurityCheck('/root', [], [], config);
 
       expect(logger.log).toHaveBeenCalledWith('WHITE:🔎 Security Check:');
       expect(logger.log).toHaveBeenCalledWith('DIM:──────────────────');
@@ -79,10 +102,11 @@ describe('cliPrint', () => {
         {
           filePath: path.join('/root', configRelativePath),
           messages: ['Contains API key', 'Contains password'],
+          type: 'file',
         },
       ];
 
-      printSecurityCheck('/root', suspiciousFiles, config);
+      printSecurityCheck('/root', suspiciousFiles, [], config);
 
       expect(logger.log).toHaveBeenCalledWith('YELLOW:1 suspicious file(s) detected and excluded from the output:');
       expect(logger.log).toHaveBeenCalledWith(`WHITE:1. WHITE:${configRelativePath}`);

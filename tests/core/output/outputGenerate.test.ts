@@ -40,10 +40,16 @@ describe('outputGenerate', () => {
     });
     mockDeps.generateHandlebarOutput.mockResolvedValue('mock output');
 
-    const output = await generateOutput([process.cwd()], mockConfig, mockProcessedFiles, [], mockDeps);
+    const output = await generateOutput([process.cwd()], mockConfig, mockProcessedFiles, [], undefined, mockDeps);
 
     expect(mockDeps.sortOutputFiles).toHaveBeenCalledWith(mockProcessedFiles, mockConfig);
-    expect(mockDeps.buildOutputGeneratorContext).toHaveBeenCalledWith([process.cwd()], mockConfig, [], sortedFiles);
+    expect(mockDeps.buildOutputGeneratorContext).toHaveBeenCalledWith(
+      [process.cwd()],
+      mockConfig,
+      [],
+      sortedFiles,
+      undefined,
+    );
     expect(output).toBe('mock output');
   });
 

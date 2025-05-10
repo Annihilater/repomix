@@ -25,19 +25,19 @@ Sie können den Repomix MCP-Server in VS Code mit einer dieser Methoden installi
 
 1. **Über das Installations-Badge:**
 
-   [![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Server&color=0098FF)](vscode:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)<br>
-   [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-VS_Code_Insiders?style=flat-square&label=Install%20Server&color=24bfa5)](vscode-insiders:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)
+  [![Install in VS Code](https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Server&color=0098FF)](vscode:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)<br>
+  [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-VS_Code_Insiders?style=flat-square&label=Install%20Server&color=24bfa5)](vscode-insiders:mcp/install?%7B%22name%22%3A%22repomix%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22repomix%22%2C%22--mcp%22%5D%7D)
 
 2. **Über die Kommandozeile:**
 
-   ```bash
-   code --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
-   ```
+  ```bash
+  code --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
+  ```
 
-   Für VS Code Insiders:
-   ```bash
-   code-insiders --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
-   ```
+  Für VS Code Insiders:
+  ```bash
+  code-insiders --add-mcp '{"name":"repomix","command":"npx","args":["-y","repomix","--mcp"]}'
+  ```
 
 ### Für Cline (VS Code-Erweiterung)
 
@@ -115,16 +115,16 @@ Dieses Tool holt, klont und verpackt ein GitHub-Repository in eine konsolidierte
 Der Repomix MCP-Server bietet zwei Dateisystemwerkzeuge, die es KI-Assistenten ermöglichen, sicher mit dem lokalen Dateisystem zu interagieren:
 
 1. `file_system_read_file`
-   - Liest Dateiinhalte unter Verwendung absoluter Pfade
-   - Implementiert Sicherheitsvalidierung mit [Secretlint](https://github.com/secretlint/secretlint)
-   - Verhindert den Zugriff auf Dateien mit sensiblen Informationen
-   - Liefert klare Fehlermeldungen für ungültige Pfade und Sicherheitsprobleme
+  - Liest Dateiinhalte unter Verwendung absoluter Pfade
+  - Implementiert Sicherheitsvalidierung mit [Secretlint](https://github.com/secretlint/secretlint)
+  - Verhindert den Zugriff auf Dateien mit sensiblen Informationen
+  - Liefert klare Fehlermeldungen für ungültige Pfade und Sicherheitsprobleme
 
 2. `file_system_read_directory`
-   - Listet Verzeichnisinhalte unter Verwendung absoluter Pfade
-   - Zeigt Dateien und Verzeichnisse mit klaren Indikatoren (`[FILE]` oder `[DIR]`)
-   - Bietet sichere Verzeichnisnavigation mit angemessener Fehlerbehandlung
-   - Validiert Pfade und stellt sicher, dass sie absolut sind
+  - Listet Verzeichnisinhalte unter Verwendung absoluter Pfade
+  - Zeigt Dateien und Verzeichnisse mit klaren Indikatoren (`[FILE]` oder `[DIR]`)
+  - Bietet sichere Verzeichnisnavigation mit angemessener Fehlerbehandlung
+  - Validiert Pfade und stellt sicher, dass sie absolut sind
 
 Beide Werkzeuge beinhalten robuste Sicherheitsmaßnahmen:
 - Validierung absoluter Pfade zur Verhinderung von Directory Traversal-Angriffen

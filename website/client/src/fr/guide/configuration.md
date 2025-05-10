@@ -97,9 +97,10 @@ Pour plus de détails et d'exemples, consultez le [Guide de compression de code]
 
 ### Intégration Git
 
-La configuration `output.git` vous permet de contrôler comment les fichiers sont triés en fonction de l'historique Git:
+La configuration `output.git` vous permet de contrôler comment les fichiers sont triés en fonction de l'historique Git et comment inclure les différences Git:
 - `sortByChanges`: Lorsque défini sur `true`, les fichiers sont triés par nombre de changements Git (commits qui ont modifié le fichier). Les fichiers avec plus de changements apparaissent en bas de la sortie. Cela peut aider à prioriser les fichiers plus activement développés. Par défaut: `true`
 - `sortByChangesMaxCommits`: Le nombre maximum de commits à analyser lors du comptage des modifications de fichiers. Par défaut: `100`
+- `includeDiffs`: Lorsque défini sur `true`, inclut les différences Git dans la sortie (inclut séparément les modifications de l'arbre de travail et les modifications en cours). Cela permet au lecteur de voir les changements en attente dans le dépôt. Par défaut: `false`
 
 Exemple de configuration:
 ```json
@@ -107,7 +108,8 @@ Exemple de configuration:
   "output": {
     "git": {
       "sortByChanges": true,
-      "sortByChangesMaxCommits": 100
+      "sortByChangesMaxCommits": 100,
+      "includeDiffs": true
     }
   }
 }

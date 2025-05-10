@@ -28,7 +28,7 @@ features:
 
 ## 快速开始
 
-使用 Repomix 生成打包文件（`repomix-output.txt`）后，您可以将其发送给 AI 助手，并附上这样的提示：
+使用 Repomix 生成打包文件（`repomix-output.xml`）后，您可以将其发送给 AI 助手（如 ChatGPT、Claude），并附上这样的提示：
 
 ```
 此文件包含了仓库中所有文件的合并内容。
@@ -47,9 +47,9 @@ AI 将分析您的整个代码库并提供全面的见解：
 
 
 
-## 进阶使用指南
+## 使用 CLI 工具 {#using-the-cli-tool}
 
-对于需要更多控制的高级用户，Repomix 通过其 CLI 界面提供了广泛的自定义选项。
+Repomix 可以作为命令行工具使用，提供强大的功能和自定义选项。
 
 ### 快速上手
 
@@ -75,7 +75,7 @@ brew install repomix
 repomix
 ```
 
-就是这么简单！Repomix 将在您的当前目录中生成一个 `repomix-output.txt` 文件，其中包含了以 AI 友好格式整理的整个代码库。
+就是这么简单！Repomix 将在您的当前目录中生成一个 `repomix-output.xml` 文件，其中包含了以 AI 友好格式整理的整个代码库。
 
 
 
@@ -183,8 +183,8 @@ repomix --style plain
 ```
 
 ### 更多示例
-::: tip
-💡 查看我们的 [GitHub 仓库](https://github.com/yamadashy/repomix)获取完整文档和更多示例！
+::: tip 需要更多帮助？ 💡
+查看我们的[使用指南](./guide/)获取详细说明，或访问[GitHub 仓库](https://github.com/yamadashy/repomix)获取更多示例和源代码。
 :::
 
 </div>

@@ -30,12 +30,14 @@ describe('PackCodebaseTool', () => {
     fileCharCounts: { 'test.js': 100 },
     fileTokenCounts: { 'test.js': 50 },
     suspiciousFilesResults: [],
+    gitDiffTokenCount: 0,
+    suspiciousGitDiffResults: [],
   };
 
   beforeEach(() => {
     vi.resetAllMocks();
     registerPackCodebaseTool(mockServer);
-    toolHandler = (mockServer.tool as ReturnType<typeof vi.fn>).mock.calls[0][3];
+    toolHandler = (mockServer.tool as ReturnType<typeof vi.fn>).mock.calls[0][4];
 
     // デフォルトのパスの動作をモック
     vi.mocked(path.join).mockImplementation((...args) => args.join('/'));
@@ -54,10 +56,14 @@ describe('PackCodebaseTool', () => {
     vi.mocked(runCli).mockImplementation(async (directories, cwd, opts = {}) => ({
       packResult: defaultPackResult,
       config: {
+        input: {
+          maxFileSize: 50 * 1024 * 1024,
+        },
         output: {
           filePath: opts.output ?? '/temp/dir/repomix-output.xml',
           style: opts.style ?? 'xml',
           parsableStyle: false,
+          stdout: false,
           fileSummary: true,
           directoryStructure: true,
           removeComments: false,
@@ -70,6 +76,7 @@ describe('PackCodebaseTool', () => {
           git: {
             sortByChanges: true,
             sortByChangesMaxCommits: 100,
+            includeDiffs: false,
           },
           includeEmptyDirectories: false,
         },
@@ -95,6 +102,7 @@ describe('PackCodebaseTool', () => {
       'pack_codebase',
       'Package local code directory into a consolidated file for AI analysis',
       expect.any(Object),
+      expect.any(Object), // annotations
       expect.any(Function),
     );
   });

@@ -5,6 +5,7 @@
 
 ## 출력 옵션
 - `-o, --output <file>`: 출력 파일 이름 (기본값: `repomix-output.txt`)
+- `--stdout`: 파일에 쓰는 대신 표준 출력으로 출력 (`--output` 옵션과 함께 사용 불가)
 - `--style <type>`: 출력 스타일 (`plain`, `xml`, `markdown`) (기본값: `xml`)
 - `--parsable-style`: 선택한 스타일 스키마에 기반한 파싱 가능한 출력 활성화 (기본값: `false`)
 - `--compress`: 함수와 클래스 시그니처에 중점을 두고 구현 세부 사항을 제거하는 지능형 코드 추출을 수행합니다. 자세한 내용과 예제는 [코드 압축 가이드](code-compress)를 참조하세요.
@@ -18,6 +19,8 @@
 - `--header-text <text>`: 파일 헤더에 포함할 사용자 정의 텍스트
 - `--instruction-file-path <path>`: 상세한 사용자 정의 지침이 포함된 파일 경로
 - `--include-empty-directories`: 출력에 빈 디렉토리 포함 (기본값: `false`)
+- `--include-diffs`: git 차이점을 출력에 포함 (작업 트리 및 스테이지된 변경 사항이 별도로 포함됨) (기본값: `false`)
+- `--no-git-sort-by-changes`: git 변경 횟수로 파일 정렬 비활성화 (기본값: `true`)
 
 ## 필터 옵션
 - `--include <patterns>`: 포함할 패턴 (쉼표로 구분)
@@ -53,6 +56,12 @@ repomix
 
 # 사용자 정의 출력
 repomix -o output.xml --style xml
+
+# 표준 출력으로 출력
+repomix --stdout > custom-output.txt
+
+# 표준 출력으로 출력 후 다른 명령으로 파이프 (예: simonw/llm)
+repomix --stdout | llm "이 코드가 무엇을 하는지 설명해주세요"
 
 # 압축을 사용한 사용자 정의 출력
 repomix --compress

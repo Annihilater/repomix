@@ -99,10 +99,11 @@ dist/**
 
 ### Git 集成
 
-`output.git` 配置允许您控制如何基于 Git 历史记录对文件进行排序：
+`output.git` 配置允许您控制如何基于 Git 历史记录对文件进行排序以及如何包含 Git 差异：
 
 - `sortByChanges`：当设置为 `true` 时，文件将按 Git 更改次数（修改该文件的提交数）进行排序。更改次数较多的文件将出现在输出的底部。这有助于优先处理更活跃开发的文件。默认值：`true`
 - `sortByChangesMaxCommits`：计算文件更改次数时要分析的最大提交数。默认值：`100`
+- `includeDiffs`：当设置为 `true` 时，在输出中包含 Git 差异（同时分别包含工作树和暂存区的更改）。这允许读者查看存储库中的待处理更改。默认值：`false`
 
 配置示例：
 ```json
@@ -110,7 +111,8 @@ dist/**
   "output": {
     "git": {
       "sortByChanges": true,
-      "sortByChangesMaxCommits": 100
+      "sortByChangesMaxCommits": 100,
+      "includeDiffs": true
     }
   }
 }

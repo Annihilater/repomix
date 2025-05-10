@@ -39,6 +39,9 @@ const semanticSuggestionMap: Record<string, string[]> = {
   reduce: ['--compress'],
   'strip-comments': ['--remove-comments'],
   'no-comments': ['--remove-comments'],
+  print: ['--stdout'],
+  console: ['--stdout'],
+  terminal: ['--stdout'],
 };
 
 export const run = async () => {
@@ -50,6 +53,7 @@ export const run = async () => {
       .option('-v, --version', 'show version information')
       // Output Options
       .option('-o, --output <file>', 'specify the output file name')
+      .addOption(new Option('--stdout', 'output to stdout instead of writing to a file').conflicts('output'))
       .option('--style <type>', 'specify the output style (xml, markdown, plain)')
       .option('--parsable-style', 'by escaping and formatting, ensure the output is parsable as a document of its type')
       .option('--compress', 'perform code compression to reduce token count')
@@ -64,6 +68,10 @@ export const run = async () => {
       .option('--instruction-file-path <path>', 'path to a file containing detailed custom instructions')
       .option('--include-empty-directories', 'include empty directories in the output')
       .option('--no-git-sort-by-changes', 'disable sorting files by git change count')
+      .option(
+        '--include-diffs',
+        'include git diffs in the output (includes both work tree and staged changes separately)',
+      )
       // Filter Options
       .option('--include <patterns>', 'list of include patterns (comma-separated)')
       .option('-i, --ignore <patterns>', 'additional ignore patterns (comma-separated)')
@@ -131,6 +139,13 @@ const commanderActionEndpoint = async (directories: string[], options: CliOption
 };
 
 export const runCli = async (directories: string[], cwd: string, options: CliOptions) => {
+  // Detect stdout mode
+  // NOTE: For compatibility, currently not detecting pipe mode
+  const isForceStdoutMode = options.output === '-';
+  if (isForceStdoutMode) {
+    options.stdout = true;
+  }
+
   // Set log level based on verbose and quiet flags
   if (options.quiet) {
     logger.setLogLevel(repomixLogLevels.SILENT);
@@ -138,6 +153,11 @@ export const runCli = async (directories: string[], cwd: string, options: CliOpt
     logger.setLogLevel(repomixLogLevels.DEBUG);
   } else {
     logger.setLogLevel(repomixLogLevels.INFO);
+  }
+
+  // In stdout mode, set log level to SILENT
+  if (options.stdout) {
+    logger.setLogLevel(repomixLogLevels.SILENT);
   }
 
   logger.trace('directories:', directories);

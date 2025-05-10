@@ -154,13 +154,13 @@ To verify the installation is working:
 
 1. Restart your LLM application (Cline, Claude Desktop, etc.)
 2. Test the connection by running a simple command like:
-   ```
-   Please package the local directory /path/to/project for AI analysis using Repomix.
-   ```
-   or
-   ```
-   Please fetch and package the GitHub repository yamadashy/repomix for AI analysis.
-   ```
+  ```
+  Please package the local directory /path/to/project for AI analysis using Repomix.
+  ```
+  or
+  ```
+  Please fetch and package the GitHub repository yamadashy/repomix for AI analysis.
+  ```
 
 ## Usage Examples
 
@@ -189,20 +189,20 @@ Please package my project at /path/to/project, but only include TypeScript files
 ### Common Issues and Solutions
 
 1. **MCP server connection issues**
-   - Verify the syntax in your MCP settings file is correct
-   - Ensure you have an active internet connection (needed for npx to fetch the package)
-   - Check if any other MCP servers are causing conflicts
+  - Verify the syntax in your MCP settings file is correct
+  - Ensure you have an active internet connection (needed for npx to fetch the package)
+  - Check if any other MCP servers are causing conflicts
 
 2. **Packaging failures**
-   - Verify the specified directory or repository exists
-   - Check if you have sufficient disk space
-   - For remote repositories, ensure you have internet connectivity
-   - Try with simpler parameters first, then add complexity
+  - Verify the specified directory or repository exists
+  - Check if you have sufficient disk space
+  - For remote repositories, ensure you have internet connectivity
+  - Try with simpler parameters first, then add complexity
 
 3. **JSON parsing errors in configuration**
-   - Make sure your MCP settings file is properly formatted
-   - Verify all paths use forward slashes, even on Windows
-   - Check for any missing commas or brackets in the configuration
+  - Make sure your MCP settings file is properly formatted
+  - Verify all paths use forward slashes, even on Windows
+  - Check for any missing commas or brackets in the configuration
 
 ## Additional Information
 
